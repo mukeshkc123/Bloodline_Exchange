@@ -1,0 +1,76 @@
+###Blood Bank App
+
+#Software Setup
+-creation of the package.json file trough node initialisation using command [npm init] in bash
+-creation of server.js which contains all the backend processes.
+-creation of the folders :
+
+1. Config:
+Config refers to configuration files or settings that define how a system or application behaves.
+These files contain various parameters, options, and values that can be adjusted to customize the
+behavior of the project without modifying the source code. Configurations are typically used to control the behavior of different components of the project.
+
+2. Controllers:
+Controllers are a crucial part of the Model-View-Controller (MVC) design pattern used in web 
+development. They are responsible for handling incoming requests from users and determining 
+the appropriate response. In simpler terms, controllers receive user input, process it, 
+interact with the model (data), and then provide the necessary output or view.
+
+3. Middlewares:
+Middleware refers to software components that sit between different parts of an application or
+system, facilitating communication and interaction. In the context of web development, 
+middleware intercepts and processes HTTP requests before they reach the application's main logic
+(e.g., controllers). It can perform tasks like authentication, logging, error handling, etc.,
+ enabling developers to modularize and enhance the application's functionality.
+
+4. Models:
+Models are the backbone of the MVC design pattern. They represent the data structure and
+ business logic of the application. In other words, models define how data is organized 
+ and manipulated within the application. They interact with the database and abstract the
+  data access layer, making it easier to handle data-related tasks.
+
+5. Utils:
+Utils (short for utilities) refer to a collection of helper functions or tools that serve
+specific purposes and are used throughout the project. They often contain reusable code that
+simplifies common tasks, enhances code readability, and reduces duplication.Utils can include 
+functions for data manipulation, formatting, date handling, and other general-purpose tasks.
+
+-creation of the files:
+  1. .env:To store the enviromenatal variables like api keys, database link etc.
+  2. .gitignore: the .gitignore file is used to specify which files and directories should
+      be ignored and not tracked by the version control system. 
+
+#Creation of the node server
+-installed the required packages and required it in the server.js file.
+-packages are:
+    1. Express: Express is a popular Node.js web application framework used for building server-side applications with a 
+       simple and minimalistic approach.
+    2. Cors: Cors (Cross-Origin Resource Sharing) is a security feature that allows controlled access to resources on a web
+       page from different domains, enhancing web application security.
+    3. Mongoose: Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js, providing a more straightforward
+       and schema-based way to interact with MongoDB databases.
+    4. Colors: Colors is a Node.js library that adds color and style to the terminal output, making the command-line interface
+        more visually appealing and readable.
+    5. Morgan: Morgan is a middleware for Node.js applications that logs HTTP request details, such as the request method, URL, 
+       response status, and response time, for debugging and monitoring purposes.
+    6. Dotenv: Dotenv is a Node.js library used for loading environment variables from a .env file into the process environment,
+     simplifying the configuration of applications.
+
+# creation of the test request:
+  -created a test route in route folder
+  -created a testController in controller folder
+  -imported and used it in the server.js
+
+#Creation of the mongoDb data base:
+ -created a mongodb database in mongodb atlas whose URI string is stored in the .env file as environmental variable.
+ -created db.js file where we imported mongoose to connect  the database with server
+ -imported the connectDB() function from this to server.js;
+
+#Creation of the userModel.js in models folder
+ -created a user schema with required elements
+
+#creation of the authRoutes.js in routes folder
+  -created a register post route in this file
+  -creation of the  authController.js which contain all the controllers like ragister,login etc.
+  -imported the userModel from models in this
+  -hashed the password in register controller using the bcryptjs package aftr its installation
