@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     organisationName: {
       type: String,
-      required: function() {
+      required: function () {
         if (this.role === "organisation") {
           return true;
         } else {
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     hospitalName: {
       type: String,
-      required: function() {
+      required: function () {
         if (this.role === "hospital") {
           return true;
         } else {
@@ -45,6 +45,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "password is required"],
     },
+    
+    website: {
+      type: String,
+    },
+
     address: {
       type: String,
       required: [true, "address is required"],
