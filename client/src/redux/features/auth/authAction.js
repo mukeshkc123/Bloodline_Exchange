@@ -1,19 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../../services/API";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 
-
-// auth action for login
 export const userLogin = createAsyncThunk(
   "auth/login",
   async ({ role, email, password }, { rejectWithValue }) => {
     try {
       const { data } = await API.post("/auth/login", { role, email, password });
-      //store token in local storage
+      //store token
       if (data.success) {
-        // alert(data.message);
+        alert(data.message);
         localStorage.setItem("token", data.token);
-        toast.success(data.message)
+        window.location.replace("/");
       }
       return data;
     } catch (error) {
@@ -26,41 +24,67 @@ export const userLogin = createAsyncThunk(
   }
 );
 
-
-//auth for register
+//register
 export const userRegister = createAsyncThunk(
-    "auth/register",
-    async({email,
-        password,
-        role,
+  "auth/register",
+  async (
+    {
+      name,
+      role,
+      email,
+      password,
+      phone,
+      organisationName,
+      address,
+      hospitalName,
+      website,
+    },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await API.post("/auth/register", {
         name,
+        role,
+        email,
+        password,
+        phone,
         organisationName,
+        address,
         hospitalName,
         website,
-        address,
-        phone},{rejectWithValue})=>{
-           try{
-              const {data} = await API.post('/auth/register',{email,
-                password,
-                role,
-                name,
-                organisationName,
-                hospitalName,
-                website,
-                address,
-                phone})
-                if(data.success){
-                    toast.success(data.message)
-                    window.location.replace('/login')
-                }
-           } catch (error) {
-            console.log(error);
-            if (error.response && error.response.data.message) {
-                return rejectWithValue(error.response.data.message);
-              } else {
-                return rejectWithValue(error.message);
-              }
-           }
+      });
+      if (data?.success) {
+        alert("User Registerd Successfully");
+        window.location.replace("/");
+        // toast.success("User Registerd Successfully");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
-)
+  }
+);
 
+//current user
+export const getCurrentUser = createAsyncThunk(
+  "auth/getCurrentUser",
+  async ({ rejectWithValue }) => {
+    try {
+      const res = await API.get("/auth/current_user");
+      if (res.data) {
+        return res?.data;
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

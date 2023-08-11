@@ -15,5 +15,5 @@ router.post("/login",loginController)
 module.exports = router;
 
 //getting the current User
-router.get("/current_user",authMiddleware,currentUserController)
+router.get("/current-user",authMiddleware,currentUserController)
 
